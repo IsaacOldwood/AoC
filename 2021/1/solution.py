@@ -11,3 +11,13 @@ depth_diff = df['depth'].diff()
 output = (depth_diff > 0).value_counts()[1]
 
 # print(output)
+
+# Part 2
+sliding_window = df['depth'].rolling(3)
+sliding_mean = sliding_window.mean()
+
+sliding_mean_diff = sliding_mean.diff()
+
+output = (sliding_mean_diff > 0).value_counts()[1]
+
+# print(output)
