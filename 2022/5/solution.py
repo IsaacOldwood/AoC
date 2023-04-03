@@ -54,10 +54,21 @@ for idx, row in enumerate(inst):
     inst[idx] = new_inst
 
 # Move stacks
+# for row in inst:
+#     for _ in range(0, row[0]):
+#         crate = stack_dict[row[1]].pop(0)
+#         stack_dict[row[2]].insert(0, crate)
+
+# Print answer
+# print(''.join([v[0] if v else '' for v in stack_dict.values()]))
+
+# Part 2
+# Move stacks
 for row in inst:
+    crates = []
     for _ in range(0, row[0]):
-        crate = stack_dict[row[1]].pop(0)
-        stack_dict[row[2]].insert(0, crate)
+        crates.append(stack_dict[row[1]].pop(0))
+    stack_dict[row[2]] = crates + stack_dict[row[2]]
 
 # Print answer
 print(''.join([v[0] if v else '' for v in stack_dict.values()]))
