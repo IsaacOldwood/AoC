@@ -13,4 +13,17 @@ df['comp_shared'] = df[['comp1', 'comp2']].apply(lambda x: ''.join(set(x["comp1"
 
 df['comp_shared_num'] = df['comp_shared'].apply(lambda t: sum([(ord(char) - 96) if char.islower() else (ord(char) - 63 + 25) for char in t]))
 
+#print(df['comp_shared_num'].sum())
+
+# Part 2
+df = pd.read_fwf(dir_path + '/input.txt', header=None, dtype=str)
+df.rename(columns={0:'rucksack'}, inplace=True)
+
+df['group_id'] = df.index // 3
+df = df.groupby('group_id')['rucksack'].apply(list).reset_index(name='rucksacks')
+
+df['comp_shared'] = df['rucksacks'].apply(lambda x: set.intersection(*map(set, x)))
+
+df['comp_shared_num'] = df['comp_shared'].apply(lambda t: sum([(ord(char) - 96) if char.islower() else (ord(char) - 63 + 25) for char in t]))
+
 print(df['comp_shared_num'].sum())
