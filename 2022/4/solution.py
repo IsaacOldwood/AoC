@@ -18,4 +18,12 @@ df['subset_2'] = df[['range1_set', 'range2_set']].apply(lambda x: set(x["range2_
 
 subsets = df[['subset_1', 'subset_2']].value_counts()
 
+#print(subsets.sum() - (subsets.loc[subsets.index == (False, False)]).sum())
+
+# Part 2
+df['subset_1'] = df[['range1_set', 'range2_set']].apply(lambda x: len(set(x["range1_set"]).intersection(set(x["range2_set"]))) > 0, axis=1)
+df['subset_2'] = df[['range1_set', 'range2_set']].apply(lambda x: len(set(x["range2_set"]).intersection(set(x["range1_set"]))) > 0, axis=1)
+
+subsets = df[['subset_1', 'subset_2']].value_counts()
+
 print(subsets.sum() - (subsets.loc[subsets.index == (False, False)]).sum())
