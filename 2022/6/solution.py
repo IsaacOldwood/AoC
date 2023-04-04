@@ -15,4 +15,16 @@ for idx, c in enumerate(stream_list):
         solution = idx + 4
         break
 
+# print(solution)
+
+# Part 2
+n = 14
+solution = None
+for idx, c in enumerate(stream_list):
+    # If following three characters are different then break and return position as solution
+    substream = [c] + [stream_list[idx+i] for i in range(1,n)]
+    if len(substream) == len(set(substream)):
+        solution = idx + n
+        break
+
 print(solution)
