@@ -16,4 +16,22 @@ df["diff"] = (df[1] - df[0]).abs()
 
 # Total difference
 total_diff = df["diff"].sum()
-print(total_diff)
+print(f"Part 1 answer: {total_diff=}")
+
+# Part 2
+# Set the default count to 0
+df["count"] = 0
+# Get the unique ids
+unique_ids = df[0].unique()
+
+# Count occurrences
+for i in unique_ids:
+    count = df.loc[df[1] == i].shape[0]
+    df.loc[df[0] == i, "count"] = count
+
+# Calculate the similarity
+df["sim"] = df[0] * df["count"]
+
+# Calculate the total similarity
+total_sim = df["sim"].sum()
+print(f"Part 2 answer: {total_sim=}")
